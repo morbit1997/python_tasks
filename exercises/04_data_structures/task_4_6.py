@@ -28,3 +28,10 @@ Next-Hop              {}
 Last update           {}
 Outbound Interface    {}
 """
+list1 = ospf_route.split(',')
+list2 = list1[0].split()
+list1.pop(0)
+list3 = list1 + list2
+print(list3)
+#list1.pop(2)
+#print(list1)
