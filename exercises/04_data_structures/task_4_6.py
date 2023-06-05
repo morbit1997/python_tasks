@@ -31,7 +31,8 @@ Outbound Interface    {}
 list1 = ospf_route.split(',')
 list2 = list1[0].split()
 list1.pop(0)
+list2.pop(2)
 list3 = list1 + list2
-print(list3)
-#list1.pop(2)
-#print(list1)
+list3.insert(3,list3[3][1:7])
+list3.pop(4)
+print(template.format(list3[2],list3[3],list3[4],list3[0].replace(' ',''),list3[1].replace(' ','')))
