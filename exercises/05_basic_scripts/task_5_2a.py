@@ -49,3 +49,28 @@ bin_ip = "00001010000000010000000111000011"
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+ip_mask = input("Введите адрес и маску сети: ").split('/')
+#ip_mask = '10.0.1.1/24'
+#ip_mask = ip_mask.split('/')
+ip_template = '''
+Network:
+{0:<8}  {1:<8}  {2:<8}  {3:<8}
+{0:08b}  {1:08b}  {2:08b}  {3:08b}
+
+Mask:
+{8}
+{4:<8}  {5:<8}  {6:<8}  {7:<8}
+{4:08b}  {5:08b}  {6:08b}  {7:08b}
+'''
+ip_addr = ip_mask[0]
+ip_addr = ip_addr.split('.')
+maska = int(ip_mask[1])
+strmask = '/' + str(maska)
+binmask = "1" * maska + "0" * (32 - maska)
+bin_ip_addr = '{:08b}{:08b}{:08b}{:08b}'.format(int(ip_addr[0]),int(ip_addr[1]),int(ip_addr[2]),int(ip_addr[3]))
+bin_ip_netaddr = bin_ip_addr[0:maska]
+#print(bin_ip_addr)
+#print(bin_ip_netaddr)
+bin_ip_net = bin_ip_netaddr + "0" * (32 - maska)
+#print(bin_ip_net)
+print(ip_template.format(int(bin_ip_net[0:8],2),int(bin_ip_net[8:16],2),int(bin_ip_net[16:24],2),int(bin_ip_net[24:32],2),int(binmask[0:8],2), int(binmask[8:16],2), int(binmask[16:24],2), int(binmask[24:32],2), strmask))
