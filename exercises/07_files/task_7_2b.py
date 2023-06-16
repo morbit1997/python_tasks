@@ -15,5 +15,21 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
-
+from sys import argv
 ignore = ["duplex", "alias", "configuration"]
+
+conf_file = argv[1]
+dest_file = argv[2]
+flag = 0
+with open(conf_file) as f, open(dest_file, 'w') as f2:
+    for line in f:
+        for ignor in ignore:
+            if line.startswith("!"):
+                flag = 1
+                break
+            elif ignor in line:
+                flag = 1
+                continue
+        if flag != 1:
+            f2.write(line)
+        flag = 0
