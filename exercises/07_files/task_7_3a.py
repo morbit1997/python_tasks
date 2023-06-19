@@ -40,3 +40,16 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+list1 = []
+with open('CAM_table.txt') as f:
+    for line in f:
+        mod_line = line.split()
+        if mod_line and mod_line[0].isdigit():
+            mod_line.pop(2)
+            mod_line[0] = int(mod_line[0])
+            list1.append(list(mod_line))
+        else:
+            continue
+list1.sort()
+for i in list1:
+    print('{:<8} {:10} {:>10}'.format(i[0],i[1],i[2]))
