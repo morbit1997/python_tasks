@@ -64,3 +64,28 @@ def ignore_command(command, ignore):
         if word in command:
             ignore_status = True
     return ignore_status
+
+def convert_config_to_dict(config_filename):
+    my_dict = {}
+    dict_status = ""
+    with open(config_filename) as f:
+        for line in f:
+            if len(line.rstrip()) == 0:
+                continue
+            if line.startswith("!"):
+                continue
+            elif ignore_command(line, ignore) == True:
+                continue
+            if line.startswith("interface") or line.startswith("line"):
+                dict_status = line.rstrip()
+                my_dict[line.rstrip()] = []
+                continue
+            if dict_status in my_dict.keys() and line.rstrip() != "end":
+                my_dict[dict_status].append(line.strip())
+                continue
+            else:            
+                my_dict[line.rstrip()] = []
+    #for keys, values in my_dict.items():
+    #   print("{} -> {}".format(keys,values))
+    return my_dict
+convert_config_to_dict('config_sw1.txt')
